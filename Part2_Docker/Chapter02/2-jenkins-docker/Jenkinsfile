@@ -1,9 +1,9 @@
-def mainDir="Chapter02/2-jenkins-docker"
+def mainDir="Part2_Docker/Chapter02/2-jenkins-docker"
 def ecrLoginHelper="docker-credential-ecr-login"
-def region="<AWS Region>"
-def ecrUrl="<AWS ECR URL>"
-def repository="<Image Repository Name>"
-def deployHost="<Deploy VM Private IP>"
+def region="ap-northeast-2"
+def ecrUrl="001138338292.dkr.ecr.ap-northeast-2.amazonaws.com/fastcampus-part2-test"
+def repository="fastcampus-part2-test"
+def deployHost="172-31-49-224"
 
 pipeline {
     agent any
