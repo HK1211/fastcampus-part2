@@ -3,7 +3,7 @@ def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
 def ecrUrl="001138338292.dkr.ecr.ap-northeast-2.amazonaws.com/fastcampus-part2-test"
 def repository="fastcampus-part2-test"
-def deployHost="172-31-49-224"
+def deployHost="172.31.49.224"
 
 pipeline {
     agent any
