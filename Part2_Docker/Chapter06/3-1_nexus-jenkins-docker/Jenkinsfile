@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh """
                 cd ${mainDir}
-                ./gradlew clean build
+                sudo ./gradlew clean build
                 """
             }
         }
@@ -27,7 +27,7 @@ pipeline {
                 sh """
                     cd ${mainDir}
                     docker login -u 'test' -p 'test' ${nexusUrl}
-                    ./gradlew jib -Djib.to.image=${nexusUrl}/${repository}:${tagName} -DsendCredentialsOverHttp=true -Djib.console='plain'
+                    sudo ./gradlew jib -Djib.to.image=${nexusUrl}/${repository}:${tagName} -DsendCredentialsOverHttp=true -Djib.console='plain'
                 """
             }
         }
