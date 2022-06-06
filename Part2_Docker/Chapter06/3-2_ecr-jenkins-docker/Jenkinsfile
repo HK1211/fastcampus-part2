@@ -1,4 +1,4 @@
-def mainDir="Chapter06/3-2_ecr-jenkins-docker"
+def mainDir="Part2_Docker/Chapter06/3-2_ecr-jenkins-docker"
 def ecrLoginHelper="docker-credential-ecr-login"
 def region="ap-northeast-2"
 def ecrUrl="001138338292.dkr.ecr.ap-northeast-2.amazonaws.com"
