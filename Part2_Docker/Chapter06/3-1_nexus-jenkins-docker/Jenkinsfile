@@ -1,9 +1,9 @@
 def mainDir="Chapter06/3-1_nexus-jenkins-docker"
-def region="<AWS Region>"
-def nexusUrl="<Nexus Private IP>:5000"
-def repository="<Image Repository Name>"
-def deployHost="<Deploy VM Private IP>"
-def tagName="<Image Tag Name>"
+def region="ap-northeast-2"
+def nexusUrl="3.39.247.165:5000"
+def repository="fastcampus-part2-test"
+def deployHost="172.31.51.155"
+def tagName="nexus"
 
 pipeline {
     agent any
@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh """
                     cd ${mainDir}
-                    docker login -u '<Nexus ID>' -p '<Nexus Password>' ${nexusUrl}
+                    docker login -u 'test' -p 'test' ${nexusUrl}
                     ./gradlew jib -Djib.to.image=${nexusUrl}/${repository}:${tagName} -DsendCredentialsOverHttp=true -Djib.console='plain'
                 """
             }
@@ -45,7 +45,7 @@ pipeline {
                             chmod +x clair-scanner_linux_amd64
                             mv clair-scanner_linux_amd64 /usr/local/bin/clair-scanner
                         """
-                        sh "clair-scanner --ip ${jenkins_ip} --clair='http://${clair_ip}:6060' --log='clair.log' \
+                        sh "clair-scanner --ip ${jenkins_ip} --clair='http://3.38.142.64:6060' --log='clair.log' \
                                 --report='report.txt' ${nexusUrl}/${repository}:${tagName}"
                     } catch (err) {
                         echo err.getMessage()
@@ -58,7 +58,7 @@ pipeline {
             steps{
                 sshagent(credentials : ["deploy-key"]) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${deployHost} \
-                     'docker login -u test -p '!test00' ${nexusUrl}; \
+                     'docker login -u test -p 'test' ${nexusUrl}; \
                       docker run -d -p 80:8080 -t ${nexusUrl}/${repository}:${tagName};'"
                 }
             }
